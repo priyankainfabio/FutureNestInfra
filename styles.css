@@ -16,7 +16,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
+  scroll-snap-type: none;
 }
 
 body {
@@ -288,7 +288,7 @@ section {
 .hero-stats {
   position: absolute;
   right: clamp(18px, 5vw, 78px);
-  top: 75%;
+  top: 70%;
   z-index: 3;
   display: grid;
   gap: 24px;
@@ -377,13 +377,14 @@ section {
   position: relative;
   z-index: 3;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: visible;
   --panel-opacity: 0;
   --panel-y: 72px;
   --panel-scale: 1.08;
   --panel-veil: 100%;
   --panel-curtain: 0%;
 }
+
 
 .lodha-panel::before {
   position: absolute;
@@ -397,19 +398,8 @@ section {
 }
 
 .lodha-panel::after {
-  position: absolute;
-  left: clamp(18px, 4vw, 58px);
-  bottom: clamp(42px, 7vh, 80px);
-  z-index: 5;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 0 20px rgba(245, 154, 32, 0.08), 0 -32vh 0 -3px rgba(245, 154, 32, 0.34);
-  content: "";
-  opacity: var(--panel-opacity);
-  transform: translateY(var(--panel-y));
-  transition: opacity 700ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  display: none;
+  content: none;
 }
 
 .lodha-panel > * {
@@ -546,27 +536,77 @@ section {
 }
 
 .advantage {
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.34fr);
-  column-gap: clamp(28px, 5vw, 72px);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.56fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  min-height: 100vh;
+  padding-top: clamp(90px, 10vw, 132px);
+  padding-bottom: clamp(70px, 8vw, 112px);
+  background:
+    radial-gradient(circle at 74% 36%, rgba(245, 154, 32, 0.1), transparent 30%),
+    var(--ivory);
 }
 
 .advantage .split-heading,
-.advantage .advantage-copy,
 .advantage .advantage-track {
   grid-column: 1 / 2;
 }
 
+.advantage .split-heading {
+  display: block;
+  margin-bottom: 36px;
+}
+
+.advantage .split-heading .eyebrow {
+  color: #d76f00;
+  font-size: 14px;
+  letter-spacing: 4px;
+}
+
+.advantage .split-heading .eyebrow::after {
+  display: block;
+  width: 58px;
+  height: 3px;
+  margin-top: 18px;
+  background: #e07800;
+  content: "";
+}
+
+.advantage .split-heading h2 {
+  max-width: 780px;
+  margin: 58px 0 26px;
+  color: #050505;
+  font-size: clamp(42px, 4.7vw, 72px);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.why-lead {
+  max-width: 690px;
+  color: #5e6268;
+  font-size: clamp(18px, 1.55vw, 25px);
+  line-height: 1.55;
+}
+
 .advantage-visual {
   grid-column: 2 / 3;
-  grid-row: 1 / 4;
-  align-self: end;
+  grid-row: 1 / 3;
+  align-self: stretch;
   justify-self: center;
+  display: grid;
+  align-items: end;
+  width: 100%;
+  min-height: 620px;
   max-height: 78vh;
   overflow: hidden;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 72% 12%, rgba(224, 120, 0, 0.16) 2px, transparent 3px) 0 0 / 18px 18px,
+    linear-gradient(180deg, rgba(245, 154, 32, 0.06), rgba(245, 154, 32, 0.12));
 }
 
 .advantage-visual img {
-  width: min(300px, 24vw);
+  width: min(430px, 32vw);
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 26px 50px rgba(0, 0, 0, 0.18));
@@ -607,19 +647,40 @@ section {
 
 .advantage-track {
   display: grid;
-  grid-template-columns: repeat(5, minmax(170px, 1fr));
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  overflow-x: auto;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 24px;
+  border: 0;
+  overflow: visible;
 }
 
 .advantage-track article {
-  min-height: 190px;
-  padding: 26px;
-  border-right: 1px solid var(--line);
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  min-height: 158px;
+  padding: 28px;
+  border: 1px solid rgba(21, 18, 14, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 18px 42px rgba(21, 18, 14, 0.08);
 }
 
-.advantage-track span,
+.advantage-track span {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 0;
+  color: #d66f00;
+  border-radius: 50%;
+  background: rgba(224, 120, 0, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(224, 120, 0, 0.18);
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .driver-list span {
   display: block;
   margin-bottom: 28px;
@@ -634,8 +695,17 @@ section {
   font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
   font-size: 22px;
   font-weight: 600;
-  line-height: 1.12;
+  line-height: 1.18;
   text-transform: uppercase;
+}
+
+.advantage-track em {
+  position: absolute;
+  right: 26px;
+  bottom: 20px;
+  color: #d66f00;
+  font-style: normal;
+  font-size: 24px;
 }
 
 .dholera {
@@ -669,13 +739,7 @@ section {
 }
 
 .radar {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  width: 240px;
-  height: 240px;
-  transform: translate(-50%, -50%);
+  display: none;
 }
 
 .radar span {
@@ -810,16 +874,23 @@ address {
 
 .faq {
   display: grid;
-  grid-template-columns: minmax(260px, 0.56fr) minmax(320px, 1fr);
-  gap: clamp(30px, 6vw, 86px);
+  grid-template-columns: minmax(280px, 0.62fr) minmax(360px, 1fr);
+  gap: clamp(40px, 7vw, 110px);
+  align-items: center;
+  min-height: 100vh;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(8, 8, 8, 0.86), #080808),
+    radial-gradient(circle at 18% 80%, rgba(245, 154, 32, 0.16), transparent 24%),
+    #080808;
 }
 
 .faq-list {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(245, 188, 53, 0.58);
 }
 
 details {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(245, 188, 53, 0.58);
 }
 
 summary {
@@ -827,19 +898,21 @@ summary {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 82px;
+  min-height: 72px;
   cursor: pointer;
-  font-size: clamp(19px, 2vw, 27px);
+  color: #fff;
+  font-size: clamp(18px, 1.55vw, 24px);
   font-weight: 600;
   line-height: 1.15;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 summary::after {
   flex: 0 0 auto;
-  color: var(--gold);
+  color: #f5bc35;
   content: "+";
-  font-size: 36px;
+  font-size: 34px;
+  font-weight: 300;
 }
 
 details[open] summary::after {
@@ -852,33 +925,103 @@ summary::-webkit-details-marker {
 
 .faq p {
   max-width: 760px;
-  margin-bottom: 28px;
-  color: var(--muted);
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.faq-intro {
+  position: relative;
+  min-height: 360px;
+}
+
+.faq-intro::after {
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  left: -70px;
+  height: 150px;
+  background:
+    linear-gradient(90deg, rgba(245, 188, 53, 0.11) 1px, transparent 1px) 0 90px / 28px 1px no-repeat,
+    linear-gradient(0deg, rgba(245, 188, 53, 0.2), rgba(245, 188, 53, 0.2));
+  clip-path: polygon(0 78%, 5% 70%, 5% 55%, 9% 55%, 9% 78%, 13% 78%, 13% 42%, 17% 42%, 17% 78%, 22% 78%, 22% 58%, 29% 58%, 29% 78%, 34% 78%, 34% 30%, 39% 30%, 39% 78%, 44% 78%, 44% 48%, 51% 48%, 51% 78%, 58% 78%, 58% 34%, 64% 34%, 64% 78%, 72% 78%, 72% 54%, 82% 54%, 82% 78%, 100% 78%, 100% 100%, 0 100%);
+  content: "";
+  opacity: 0.42;
+}
+
+.faq-intro .eyebrow {
+  color: #f5bc35;
+}
+
+.faq-intro .eyebrow::after {
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 14px;
+  background: #f5bc35;
+  content: "";
+}
+
+.faq-intro h2 {
+  max-width: 420px;
+  margin: 34px 0 22px;
+  color: #fff;
+  font-size: clamp(40px, 4.2vw, 62px);
+  font-weight: 800;
+  line-height: 1.14;
+}
+
+.faq-intro h2 strong {
+  color: #f5bc35;
+  font-weight: 800;
+}
+
+.faq-intro > p {
+  max-width: 320px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 20px;
+  line-height: 1.42;
+}
+
+summary span {
+  flex: 0 0 48px;
+  color: #f5bc35;
+  font-weight: 500;
 }
 
 .contact {
   display: grid;
-  grid-template-columns: minmax(260px, 0.62fr) minmax(270px, 0.68fr) minmax(320px, 0.66fr);
-  gap: clamp(30px, 7vw, 90px);
+  grid-template-columns: minmax(280px, 0.85fr) minmax(320px, 0.72fr);
+  gap: clamp(24px, 4vw, 54px);
   color: #fff;
   background: var(--black);
-  min-height: auto;
+  padding-top: 150px;
+  padding-bottom: 24px;
+  align-content: start !important;
+  align-items: start;
   scroll-margin-top: 120px;
 }
 
+
 .contact.lodha-panel {
-  min-height: auto;
+  /* ensure contact panel doesn't collapse the JS-driven animation */
   padding-top: 42px;
-  padding-bottom: 36px;
+  padding-bottom: 28px;
   align-content: start;
+  --panel-opacity: 1;
+  --panel-y: 0px;
+  --panel-scale: 1;
+  --panel-veil: 0%;
+  --panel-curtain: -100%;
+}
+
+
+.contact.lodha-panel::before,
+.contact.lodha-panel::after {
+  display: none;
 }
 
 .office-visual {
-  align-self: stretch;
-  min-height: 300px;
-  max-height: 330px;
-  margin: 0;
-  overflow: hidden;
+  display: none;
 }
 
 .office-visual img {
@@ -900,10 +1043,32 @@ address a {
 
 .contact-form {
   display: grid;
-  gap: 12px;
-  padding: clamp(20px, 3vw, 32px);
+  gap: 10px;
+  padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.055);
+}
+
+/* last sections should always be visible (JS/scroll animations can sometimes keep them at opacity 0) */
+.faq.lodha-panel .faq-intro,
+.faq.lodha-panel .faq-list,
+.contact.lodha-panel .contact-copy,
+.contact.lodha-panel .contact-form {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
+.contact-copy h2 {
+  margin-bottom: 18px;
+  font-size: clamp(30px, 3vw, 42px);
+}
+
+.contact-copy address,
+.contact-copy address a,
+.contact-copy address span {
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 label {
@@ -931,7 +1096,7 @@ textarea {
 
 textarea {
   resize: vertical;
-  max-height: 112px;
+  max-height: 84px;
 }
 
 input::placeholder,
@@ -940,10 +1105,11 @@ textarea::placeholder {
 }
 
 .site-footer {
-  padding: clamp(42px, 6vw, 72px) clamp(18px, 5vw, 78px) 24px;
+  padding: 28px clamp(18px, 5vw, 78px) 20px;
   color: rgba(255, 255, 255, 0.68);
   background: #030303;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  scroll-snap-align: none;
 }
 
 .footer-main {
@@ -951,7 +1117,7 @@ textarea::placeholder {
   grid-template-columns: minmax(180px, 0.7fr) minmax(180px, 0.55fr) minmax(280px, 1fr);
   gap: clamp(28px, 6vw, 84px);
   align-items: start;
-  padding-bottom: 38px;
+  padding-bottom: 22px;
 }
 
 .footer-brand img {
