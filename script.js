@@ -6,6 +6,7 @@ const revealItems = document.querySelectorAll(".reveal");
 const hero = document.querySelector(".hero");
 const intro = document.querySelector(".brand-intro");
 const lodhaPanels = document.querySelectorAll(".lodha-panel");
+const contactSection = document.querySelector("#contact");
 
 const syncHeader = () => {
   header.classList.toggle("scrolled", window.scrollY > 12);
@@ -33,6 +34,18 @@ window.addEventListener("scroll", syncHeader, { passive: true });
 window.addEventListener("scroll", syncHeroProgress, { passive: true });
 window.addEventListener("scroll", syncIntroProgress, { passive: true });
 window.addEventListener("resize", syncIntroProgress);
+
+const scrollToContact = () => {
+  if (!contactSection) return;
+  const top = contactSection.getBoundingClientRect().top + window.scrollY - 120;
+  window.scrollTo({ top, behavior: "smooth" });
+};
+
+if (window.location.hash === "#contact") {
+  window.addEventListener("load", () => {
+    setTimeout(scrollToContact, 80);
+  });
+}
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -82,6 +95,16 @@ menuToggle.addEventListener("click", () => {
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
+    document.body.classList.remove("nav-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
+});
+
+document.querySelectorAll('a[href="#contact"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    history.pushState(null, "", "#contact");
+    scrollToContact();
     document.body.classList.remove("nav-open");
     menuToggle.setAttribute("aria-expanded", "false");
   });
